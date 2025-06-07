@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nelakurthi Naveen - Portfolio Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Courier New', Courier, monospace;
+    }
+    
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f0f2f5 0%, #ffffff 100%);
+      display: flex;
+      flex-direction: column;
+      color: #333;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    
+    /* Header styling with back button */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 5%;
+      background-color: white;
+      border-bottom: 2px solid black;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+      z-index: 1000;
+      transition: all 0.4s ease;
+    }
+    
+    .header.scrolled {
+      padding: 10px 5%;
+      background-color: rgba(255, 255, 255, 0.98);
+    }
+    
+    .back-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+      font-size: 18px;
+      transition: all 0.3s ease;
+      padding: 8px 16px;
+      border: 2px solid transparent;
+      border-radius: 8px;
+    }
+    
+    .back-link:hover {
+      color: white;
+      background-color: black;
+      border-color: white;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+    
+    .logo {
+      font-weight: bold;
+      font-size: 24px;
+      letter-spacing: 1px;
+      position: relative;
+    }
+    
+    .logo::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: black;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.4s ease;
+    }
+    
+    .logo:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+    
+    .nav-link {
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+      font-size: 18px;
+      position: relative;
+      padding: 5px 0;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: black;
+      transition: width 0.4s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      position: relative;
+      overflow: hidden;
+      margin-top: 80px;
+    }
+    
+    .diamond-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      grid-template-rows: repeat(10, 1fr);
+      z-index: -1;
+      opacity: 0.1;
+    }
+    
+    .diamond {
+      width: 100%;
+      height: 100%;
+      transform: rotate(45deg);
+      border: 1px solid rgba(0,0,0,0.1);
+      transition: all 2s ease;
+    }
+    
+    .hero-content {
+      max-width: 800px;
+      z-index: 2;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 2px solid black;
+      border-radius: 12px;
+      box-shadow: 8px 3px 12px rgba(0,0,0,0.4);
+    }
+    
+    .hero h1 {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 15px;
+    }
+    
+    .hero h1::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: black;
+    }
+    
+    .hero h2 {
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+      color: #444;
+    }
+    
+    .tagline {
+      font-size: 1.5rem;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    
+    .typed-text {
+      display: inline-block;
+      position: relative;
+    }
+    
+    .typed-cursor {
+      display: inline-block;
+      animation: blink 0.7s infinite;
+    }
+    
+    /* Diamond Profile */
+    .diamond-profile {
+      width: 300px;
+      height: 300px;
+      margin: 50px auto;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: floatDiamond 8s infinite ease-in-out;
+    }
+    
+    .diamond-profile-inner {
+      width: 100%;
+      height: 100%;
+      transform: rotate(45deg);
+      border: 2px solid black;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 30px;
+      background: white;
+      box-shadow: 8px 3px 12px rgba(0,0,0,0.4);
+      transition: all 0.4s ease;
+    }
+    
+    .diamond-profile-inner:hover {
+      transform: rotate(45deg) scale(1.05);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    }
+    
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 3px solid black;
+      margin-bottom: 20px;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 60px;
+      overflow: hidden;
+    }
+    
+    .diamond-name {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      padding: 15px 40px;
+      background-color: white;
+      color: black;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2rem;
+      border: 2px solid black;
+      border-radius: 30px;
+      margin-top: 30px;
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      box-shadow: 8px 3px 12px rgba(0,0,0,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-button:hover {
+      background-color: black;
+      color: white;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
+    }
+    
+    .cta-button:hover::before {
+      left: 100%;
+    }
+    
+    /* Skills Section */
+    .skills-section {
+      padding: 80px 5%;
+      text-align: center;
+      background: white;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .skills-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect x="0" y="0" width="10" height="10" fill="black" opacity="0.05" transform="rotate(45 50 50)"/></svg>');
+      z-index: 0;
+    }
+    
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 60px;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 15px;
+      z-index: 2;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: black;
+    }
+    
+    .sub-section-title {
+      font-size: 1.8rem;
+      margin: 40px 0 30px;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .sub-section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 2px;
+      background: black;
+    }
+    
+    .skills-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .skill-card {
+      background: white;
+      border: 2px solid black;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 8px 3px 12px rgba(0,0,0,0.4);
+      transition: all 0.4s ease;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .skill-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+    }
+    
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: black;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    
+    .skill-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .skill-icon {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+    
+    .skill-card:hover .skill-icon {
+      transform: scale(1.2);
+    }
+    
+    .skill-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    
+    .skill-description {
+      color: #555;
+      line-height: 1.6;
+    }
+    
+    /* Projects Section */
+    .projects-section {
+      padding: 80px 5%;
+      text-align: center;
+      background: #f8f8f8;
+      position: relative;
+      overflow: hidden;
+      border-top: 2px solid #eee;
+    }
+    
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .project-card {
+      background: white;
+      border: 2px solid black;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 8px 3px 12px rgba(0,0,0,0.4);
+      transition: all 0.4s ease;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+    }
+    
+    .project-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: black;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    
+    .project-card:hover::after {
+      transform: scaleX(1);
+    }
+    
+    .project-title {
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .project-description {
+      color: #555;
+      margin-bottom: 20px;
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+    
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    
+    .tech-tag {
+      background: #f0f0f0;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 0.85rem;
+    }
+    
+    .project-links {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .project-link {
+      display: inline-block;
+      padding: 10px 25px;
+      background: white;
+      color: black;
+      border: 2px solid black;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      flex-grow: 1;
+      text-align: center;
+    }
+    
+    .project-link:hover {
+      background: black;
+      color: white;
+    }
+    
+    .project-link.disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    
+    /* Project Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 2000;
+      overflow-y: auto;
+      padding: 20px;
+    }
+    
+    .modal-content {
+      background: white;
+      max-width: 800px;
+      margin: 40px auto;
+      border: 2px solid black;
+      border-radius: 12px;
+      padding: 30px;
+      position: relative;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .close-modal:hover {
+      color: #ff3333;
+      transform: rotate(90deg);
+    }
+    
+    .modal-title {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 10px;
+    }
+    
+    .modal-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+    
+    .modal-image {
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #f9f9f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 250px;
+    }
+    
+    .modal-image i {
+      font-size: 5rem;
+      color: #ddd;
+    }
+    
+    .modal-details {
+      padding: 10px;
+    }
+    
+    .modal-section {
+      margin-bottom: 25px;
+    }
+    
+    .modal-section h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .modal-section ul {
+      padding-left: 25px;
+    }
+    
+    .modal-section li {
+      margin-bottom: 8px;
+    }
+    
+    .modal-tech-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .modal-tech-tag {
+      background: #f0f0f0;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      padding: 6px 15px;
+      font-size: 0.9rem;
+    }
+    
+    /* Footer */
+    .footer {
+      padding: 60px 5% 30px;
+      background: black;
+      color: white;
+      text-align: center;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: white;
+      color: black;
+      font-size: 1.5rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .social-link:hover {
+      transform: translateY(-8px) scale(1.1);
+      box-shadow: 0 10px 20px rgba(255,255,255,0.2);
+    }
+    
+    .copyright {
+      color: #aaa;
+      font-size: 1rem;
+      margin-top: 20px;
+    }
+    
+    /* Animations */
+    @keyframes floatDiamond {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .hero h1 {
+        font-size: 3.2rem;
+      }
+      
+      .hero h2 {
+        font-size: 1.8rem;
+      }
+      
+      .diamond-profile {
+        width: 250px;
+        height: 250px;
+      }
+      
+      .modal-body {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+      }
+      
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero h2 {
+        font-size: 1.5rem;
+      }
+      
+      .tagline {
+        font-size: 1.2rem;
+      }
+      
+      .hero-content {
+        padding: 30px 20px;
+      }
+      
+      .diamond-profile {
+        width: 220px;
+        height: 220px;
+      }
+      
+      .profile-pic {
+        width: 120px;
+        height: 120px;
+      }
+      
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .back-link {
+        font-size: 16px;
+        padding: 6px 12px;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .project-links {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header with back navigation -->
+  <header class="header" id="header">
+    <a href="./index.html" class="back-link">
+      <i class="fas fa-arrow-left"></i>
+      Back to Navigation
+    </a>
+    <div class="logo">PORTFOLIO</div>
+    <nav class="nav-links">
+      <a href="#skills" class="nav-link">Skills</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="./contact.html" class="nav-link">Contact</a>
+    </nav>
+  </header>
+  
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="diamond-grid">
+      <!-- Dynamically generated diamonds in JS -->
+    </div>
+    
+    <div class="hero-content">
+      <h1>Nelakurthi Naveen</h1>
+      <h2>CSE Student & Developer</h2>
+      <p class="tagline">Crafting Smart Web Solutions with <span class="typed-text">AI</span><span class="typed-cursor">|</span></p>
+      
+      <div class="diamond-profile">
+        <div class="diamond-profile-inner">
+          <div class="profile-pic">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="diamond-name">Naveen</div>
+          <p>MERN Stack & AI Developer</p>
+        </div>
+      </div>
+      
+      <a href="./contact.html" class="cta-button">Get In Touch</a>
+    </div>
+  </section>
+  
+  <!-- Skills Section -->
+  <section class="skills-section" id="skills">
+    <h2 class="section-title">Technical Expertise</h2>
+    
+    <div class="skills-container">
+      <div class="skill-card">
+        <div class="skill-icon"><i class="fas fa-code"></i></div>
+        <h3 class="skill-name">Web Development</h3>
+        <p class="skill-description">HTML5, CSS3, JavaScript, React.js, Node.js, Express.js, MongoDB</p>
+      </div>
+      
+      <div class="skill-card">
+        <div class="skill-icon"><i class="fas fa-robot"></i></div>
+        <h3 class="skill-name">AI & ML</h3>
+        <p class="skill-description">Machine Learning, Deep Learning, Generative AI, NLP, TensorFlow</p>
+      </div>
+      
+      <div class="skill-card">
+        <div class="skill-icon"><i class="fab fa-java"></i></div>
+        <h3 class="skill-name">Core Java</h3>
+        <p class="skill-description">Object-Oriented Programming, Data Structures, Algorithms, JavaFX</p>
+      </div>
+      
+      <div class="skill-card">
+        <div class="skill-icon"><i class="fas fa-layer-group"></i></div>
+        <h3 class="skill-name">Full Stack</h3>
+        <p class="skill-description">MERN Stack, REST APIs, Database Management, Deployment, Vercel</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Projects Section -->
+  <section class="projects-section" id="projects">
+    <h2 class="section-title">Featured Projects</h2>
+    
+    <h3 class="sub-section-title">Web Projects</h3>
+    <div class="projects-grid">
+      <div class="project-card">
+        <h3 class="project-title"><i class="fas fa-plane"></i> AI Travel Planner</h3>
+        <p class="project-description">An intelligent travel itinerary generator that creates personalized travel plans based on user preferences, budget, and interests.</p>
+        <div class="project-tech">
+          <span class="tech-tag">React</span>
+          <span class="tech-tag">Node.js</span>
+          <span class="tech-tag">OpenAI API</span>
+          <span class="tech-tag">MongoDB</span>
+        </div>
+        <div class="project-links">
+          <a href="https://planifyai.vercel.app/" target="_blank" class="project-link">View Project</a>
+        </div>
+      </div>
+      
+      <div class="project-card">
+        <h3 class="project-title"><i class="fas fa-file-alt"></i> AI Resume Builder</h3>
+        <p class="project-description">A smart resume generator that creates professional resumes tailored to specific job descriptions using AI analysis.</p>
+        <div class="project-tech">
+          <span class="tech-tag">Next.js</span>
+          <span class="tech-tag">Firebase</span>
+          <span class="tech-tag">AI Integration</span>
+          <span class="tech-tag">Tailwind CSS</span>
+        </div>
+        <div class="project-links">
+          <a href="https://resume-ai-naveen-8790s-projects.vercel.app/register" target="_blank" class="project-link">View Project</a>
+        </div>
+      </div>
+      
+      <div class="project-card">
+        <h3 class="project-title"><i class="fas fa-laugh"></i> Meme Generator</h3>
+        <p class="project-description">A fun application that allows users to create and share custom memes with various templates and text options.</p>
+        <div class="project-tech">
+          <span class="tech-tag">React</span>
+          <span class="tech-tag">CSS Modules</span>
+          <span class="tech-tag">Image API</span>
+          <span class="tech-tag">Canvas</span>
+        </div>
+        <div class="project-links">
+          <a href="https://v0-meme-murex.vercel.app/" target="_blank" class="project-link">View Project</a>
+        </div>
+      </div>
+      
+      <div class="project-card">
+        <h3 class="project-title"><i class="fas fa-user-graduate"></i> Student Management System</h3>
+        <p class="project-description">A comprehensive system for managing student records, grades, and attendance in educational institutions.</p>
+        <div class="project-tech">
+          <span class="tech-tag">MERN Stack</span>
+          <span class="tech-tag">Redux</span>
+          <span class="tech-tag">JWT Auth</span>
+          <span class="tech-tag">Bootstrap</span>
+        </div>
+        <div class="project-links">
+          <a href="#" class="project-link disabled">Coming Soon</a>
+        </div>
+      </div>
+    </div>
+    
+    <h3 class="sub-section-title">Core Projects</h3>
+    <div class="projects-grid">
+      <div class="project-card">
+        <h3 class="project-title"><i class="fas fa-bolt"></i> Electricity Generation with Piezoelectric Discs</h3>
+        <p class="project-description">A sustainable energy solution that generates electricity from mechanical pressure using piezoelectric materials.</p>
+        <div class="project-links">
+          <a href="#" class="project-link view-details" data-project="piezo">View Details</a>
+        </div>
+      </div>
+      
+      <div class="project-card">
+        <h3 class="project-title"><i class="fas fa-wine-bottle"></i> Bottle with Grip</h3>
+        <p class="project-description">An ergonomic bottle design with improved grip features for enhanced usability and accessibility.</p>
+        <div class="project-links">
+          <a href="#" class="project-link view-details" data-project="bottle">View Details</a>
+        </div>
+      </div>
+      
+      <div class="project-card">
+        <h3 class="project-title"><i class="fas fa-shield-alt"></i> Fraud Detection Using Deep Learning</h3>
+        <p class="project-description">A deep learning model that detects fraudulent transactions in real-time with high accuracy.</p>
+        <div class="project-links">
+          <a href="#" class="project-link view-details" data-project="fraud">View Details</a>
+        </div>
+      </div>
+      
+      <div class="project-card">
+        <h3 class="project-title"><i class="fas fa-microphone-alt"></i> Speech to Text & Text to Speech</h3>
+        <p class="project-description">An NLP-powered system that converts speech to text and text to speech with natural language processing.</p>
+        <div class="project-links">
+          <a href="#" class="project-link view-details" data-project="speech">View Details</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="social-links">
+      <a href="https://www.instagram.com/naveen_nelakurthi?igsh=MXJiMGw0MHliYzU0" class="social-link" target="_blank">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/naveen-nelakurthi-8a59b5264" class="social-link" target="_blank">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="mailto:naveennelakurthi2709@gmail.com" class="social-link">
+        <i class="fas fa-envelope"></i>
+      </a>
+      <a href="https://github.com/naveen-8790" class="social-link" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <p class="copyright">© 2025 Nelakurthi Naveen. All Rights Reserved.</p>
+    <p class="copyright">Prakasam, Andhra Pradesh, India</p>
+  </footer>
+  
+  <!-- Project Modals -->
+  <div id="piezo-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 class="modal-title"><i class="fas fa-bolt"></i> Electricity Generation with Piezoelectric Discs</h2>
+      <div class="modal-body">
+        <div class="modal-image">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <div class="modal-details">
+          <div class="modal-section">
+            <h3><i class="fas fa-info-circle"></i> Project Overview</h3>
+            <p>This project explores sustainable energy generation using piezoelectric materials that convert mechanical pressure into electrical energy. The system is designed for high-traffic areas to harness energy from footsteps and other pressure sources.</p>
+          </div>
+          
+          <div class="modal-section">
+            <h3><i class="fas fa-cogs"></i> Key Components</h3>
+            <ul>
+              <li>Piezoelectric discs arranged in a matrix configuration</li>
+              <li>Energy harvesting circuit with voltage rectification</li>
+              <li>Energy storage system using supercapacitors</li>
+              <li>Power management unit for consistent output</li>
+              <li>LED indicators for system status monitoring</li>
+            </ul>
+          </div>
+          
+          <div class="modal-section">
+            <h3><i class="fas fa-tools"></i> Technologies Used</h3>
+            <div class="modal-tech-container">
+              <span class="modal-tech-tag">Piezoelectric Materials</span>
+              <span class="modal-tech-tag">Circuit Design</span>
+              <span class="modal-tech-tag">Energy Harvesting</span>
+              <span class="modal-tech-tag">Power Electronics</span>
+              <span class="modal-tech-tag">Supercapacitors</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="bottle-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 class="modal-title"><i class="fas fa-wine-bottle"></i> Bottle with Grip</h2>
+      <div class="modal-body">
+        <div class="modal-image">
+          <i class="fas fa-wine-bottle"></i>
+        </div>
+        <div class="modal-details">
+          <div class="modal-section">
+            <h3><i class="fas fa-info-circle"></i> Project Overview</h3>
+            <p>An innovative bottle design featuring an integrated grip system that improves handling, especially for individuals with limited hand mobility. The design combines ergonomics with aesthetic appeal.</p>
+          </div>
+          
+          <div class="modal-section">
+            <h3><i class="fas fa-cogs"></i> Design Features</h3>
+            <ul>
+              <li>Ergonomic grip contours for comfortable handling</li>
+              <li>Non-slip silicone grip surface</li>
+              <li>Reinforced base for stability</li>
+              <li>Modular design for different bottle sizes</li>
+              <li>Food-grade materials for safety</li>
+            </ul>
+          </div>
+          
+          <div class="modal-section">
+            <h3><i class="fas fa-tools"></i> Technologies Used</h3>
+            <div class="modal-tech-container">
+              <span class="modal-tech-tag">3D Modeling</span>
+              <span class="modal-tech-tag">Ergonomics</span>
+              <span class="modal-tech-tag">Material Science</span>
+              <span class="modal-tech-tag">Prototyping</span>
+              <span class="modal-tech-tag">CAD Design</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="fraud-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 class="modal-title"><i class="fas fa-shield-alt"></i> Fraud Detection Using Deep Learning</h2>
+      <div class="modal-body">
+        <div class="modal-image">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <div class="modal-details">
+          <div class="modal-section">
+            <h3><i class="fas fa-info-circle"></i> Project Overview</h3>
+            <p>A deep learning-based system that analyzes transaction patterns to detect fraudulent activities in real-time with high accuracy, reducing false positives and improving security.</p>
+          </div>
+          
+          <div class="modal-section">
+            <h3><i class="fas fa-cogs"></i> System Components</h3>
+            <ul>
+              <li>Data preprocessing pipeline for transaction data</li>
+              <li>LSTM neural network for sequence analysis</li>
+              <li>Anomaly detection algorithms</li>
+              <li>Real-time monitoring dashboard</li>
+              <li>Alert system for suspicious activities</li>
+            </ul>
+          </div>
+          
+          <div class="modal-section">
+            <h3><i class="fas fa-tools"></i> Technologies Used</h3>
+            <div class="modal-tech-container">
+              <span class="modal-tech-tag">Python</span>
+              <span class="modal-tech-tag">TensorFlow</span>
+              <span class="modal-tech-tag">Deep Learning</span>
+              <span class="modal-tech-tag">LSTM Networks</span>
+              <span class="modal-tech-tag">Pandas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="speech-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 class="modal-title"><i class="fas fa-microphone-alt"></i> Speech to Text & Text to Speech Using NLP</h2>
+      <div class="modal-body">
+        <div class="modal-image">
+          <i class="fas fa-microphone-alt"></i>
+        </div>
+        <div class="modal-details">
+          <div class="modal-section">
+            <h3><i class="fas fa-info-circle"></i> Project Overview</h3>
+            <p>An advanced NLP system that accurately converts speech to text and synthesizes natural-sounding speech from text, with capabilities for multiple languages and dialects.</p>
+          </div>
+          
+          <div class="modal-section">
+            <h3><i class="fas fa-cogs"></i> System Features</h3>
+            <ul>
+              <li>Real-time speech recognition</li>
+              <li>Context-aware transcription</li>
+              <li>Emotion-sensitive speech synthesis</li>
+              <li>Multi-language support</li>
+              <li>Customizable voice profiles</li>
+            </ul>
+          </div>
+          
+          <div class="modal-section">
+            <h3><i class="fas fa-tools"></i> Technologies Used</h3>
+            <div class="modal-tech-container">
+              <span class="modal-tech-tag">Python</span>
+              <span class="modal-tech-tag">NLP</span>
+              <span class="modal-tech-tag">Speech Recognition</span>
+              <span class="modal-tech-tag">Text-to-Speech</span>
+              <span class="modal-tech-tag">PyTorch</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    
+    // Create diamond grid background
+    const diamondGrid = document.querySelector('.diamond-grid');
+    const rows = 10;
+    const cols = 10;
+    
+    for (let i = 0; i < rows * cols; i++) {
+      const diamond = document.createElement('div');
+      diamond.classList.add('diamond');
+      
+      // Random animation delay
+      const delay = Math.random() * 5;
+      diamond.style.animationDelay = `${delay}s`;
+      
+      diamondGrid.appendChild(diamond);
+    }
+    
+    // Typing animation
+    const typedText = document.querySelector('.typed-text');
+    const textArray = ["AI", "React", "JavaScript", "MERN Stack", "Deep Learning"];
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    
+    function typeEffect() {
+      const currentText = textArray[textIndex];
+      
+      if (isDeleting) {
+        // Delete characters
+        typedText.textContent = currentText.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        // Type characters
+        typedText.textContent = currentText.substring(0, charIndex + 1);
+        charIndex++;
+      }
+      
+      // Set typing speed
+      let typeSpeed = 150;
+      
+      if (isDeleting) {
+        typeSpeed /= 2;
+      }
+      
+      // When word is complete
+      if (!isDeleting && charIndex === currentText.length) {
+        isDeleting = true;
+        typeSpeed = 1000; // Pause at end
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        textIndex++;
+        if (textIndex === textArray.length) textIndex = 0;
+        typeSpeed = 500; // Pause before typing next word
+      }
+      
+      setTimeout(typeEffect, typeSpeed);
+    }
+    
+    // Start typing effect
+    setTimeout(typeEffect, 1000);
+    
+    // Animate elements on scroll
+    const skillCards = document.querySelectorAll('.skill-card');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    function animateOnScroll() {
+      // Skill cards
+      skillCards.forEach((card, index) => {
+        const cardPosition = card.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.3;
+        
+        if (cardPosition < screenPosition) {
+          setTimeout(() => {
+            card.style.opacity = "1";
+            card.style.transform = "translateY(0)";
+          }, 150 * index);
+        }
+      });
+      
+      // Project cards
+      projectCards.forEach((card, index) => {
+        const cardPosition = card.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.3;
+        
+        if (cardPosition < screenPosition) {
+          setTimeout(() => {
+            card.style.opacity = "1";
+            card.style.transform = "translateY(0)";
+          }, 150 * index);
+        }
+      });
+    }
+    
+    // Initialize elements
+    skillCards.forEach(card => {
+      card.style.opacity = "0";
+      card.style.transform = "translateY(30px)";
+      card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+    });
+    
+    projectCards.forEach(card => {
+      card.style.opacity = "0";
+      card.style.transform = "translateY(30px)";
+      card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+    });
+    
+    // Add scroll event listener
+    window.addEventListener('scroll', animateOnScroll);
+    // Initial check
+    animateOnScroll();
+    
+    // Modal functionality
+    const modals = {
+      'piezo': document.getElementById('piezo-modal'),
+      'bottle': document.getElementById('bottle-modal'),
+      'fraud': document.getElementById('fraud-modal'),
+      'speech': document.getElementById('speech-modal')
+    };
+    
+    const viewButtons = document.querySelectorAll('.view-details');
+    const closeButtons = document.querySelectorAll('.close-modal');
+    
+    // Open modal
+    viewButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const projectId = button.getAttribute('data-project');
+        modals[projectId].style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    
+    // Close modal
+    closeButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const modal = button.closest('.modal');
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+      });
+    });
+    
+    // Close modal when clicking outside
+    window.addEventListener('click', (e) => {
+      Object.values(modals).forEach(modal => {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+          document.body.style.overflow = '';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

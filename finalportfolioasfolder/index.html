@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nelakurthi Naveen - Portfolio</title>
+  <link rel="icon" href="./travel_17424932.png" type="image/x-icon" />
+  <style>
+    /* General page style */
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background-color: #f8f8f8;
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #f0f0f0 0%, #ffffff 100%);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Animated background elements */
+    .bg-element {
+      position: absolute;
+      border: 2px solid rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      z-index: -1;
+      opacity: 0.2;
+      animation: float 6s infinite alternate;
+    }
+
+    .bg-element.top-left {
+      width: 80px;
+      height: 80px;
+      top: 10%;
+      left: 10%;
+    }
+
+    .bg-element.top-right {
+      width: 60px;
+      height: 60px;
+      top: 20%;
+      right: 15%;
+    }
+
+    .bg-element.bottom-left {
+      width: 100px;
+      height: 100px;
+      bottom: 15%;
+      left: 20%;
+    }
+
+    .bg-element.bottom-right {
+      width: 70px;
+      height: 70px;
+      bottom: 25%;
+      right: 10%;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* Container for all nav items */
+    .container {
+      position: relative;
+      width: 320px;
+      height: 320px;
+      transform: rotate(45deg);
+      transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+
+    /* Shared nav item styles */
+    .nav-item {
+      position: absolute;
+      text-decoration: none;
+      color: black;
+      background-color: white;
+      font-size: 18px;
+      font-weight: bold;
+      border: 2px solid black;
+      border-radius: 12px;
+      padding: 15px 25px;
+      box-shadow: 8px 3px 12px rgba(0,0,0,0.4);
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform: rotate(-45deg);
+      width: 100px;
+      height: 100px;
+      z-index: 2;
+      overflow: hidden;
+    }
+
+    /* Hover effect */
+    .nav-item:hover {
+      background-color: black;
+      color: white;
+      border-color: white;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+      transform: rotate(-45deg) scale(1.1);
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      z-index: 3;
+    }
+
+    /* Diamond positions */
+    /* Top */
+    .about {
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%) rotate(-45deg);
+    }
+
+    /* Right */
+    .projects {
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%) rotate(-45deg);
+    }
+
+    /* Center Home */
+    .home {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      width: 120px;
+      height: 120px;
+      font-size: 22px;
+      z-index: 4;
+    }
+
+    /* Bottom */
+    .skills {
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%) rotate(-45deg);
+    }
+
+    /* Left */
+    .contact {
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%) rotate(-45deg);
+    }
+
+    /* Decorative diamond elements */
+    .diamond-decoration {
+      position: absolute;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 12px;
+      z-index: 1;
+      transform: rotate(45deg);
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .diamond-1 {
+      width: 240px;
+      height: 240px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+      animation: pulse 4s infinite ease-in-out;
+    }
+
+    .diamond-2 {
+      width: 180px;
+      height: 180px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+      animation: pulse 3.5s infinite ease-in-out;
+      animation-delay: 0.5s;
+    }
+
+    .diamond-3 {
+      width: 120px;
+      height: 120px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+      animation: pulse 3s infinite ease-in-out;
+      animation-delay: 1s;
+    }
+
+    /* Title styling */
+    .title {
+      position: absolute;
+      top: 30px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 2.8rem;
+      font-weight: bold;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    .title span {
+      display: inline-block;
+      transform: rotate(-2deg);
+      background: white;
+      padding: 5px 15px;
+      border: 2px solid black;
+      border-radius: 8px;
+      box-shadow: 6px 3px 10px rgba(0,0,0,0.3);
+    }
+
+    /* Footer styling */
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #555;
+      letter-spacing: 1px;
+    }
+
+    /* Animation */
+    @keyframes pulse {
+      0% { opacity: 0.3; transform: translate(-50%, -50%) rotate(45deg) scale(1); }
+      50% { opacity: 0.1; transform: translate(-50%, -50%) rotate(45deg) scale(1.05); }
+      100% { opacity: 0.3; transform: translate(-50%, -50%) rotate(45deg) scale(1); }
+    }
+
+    /* Responsive design */
+    @media (max-width: 600px) {
+      .container {
+        transform: rotate(45deg) scale(0.8);
+      }
+      
+      .title {
+        font-size: 2.2rem;
+        top: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        transform: rotate(45deg) scale(0.65);
+      }
+      
+      .title {
+        font-size: 1.8rem;
+      }
+      
+      .nav-item {
+        padding: 12px 20px;
+        font-size: 16px;
+      }
+      
+      .home {
+        width: 100px;
+        height: 100px;
+        font-size: 18px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .container {
+        transform: rotate(45deg) scale(0.55);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background elements -->
+  <div class="bg-element top-left"></div>
+  <div class="bg-element top-right"></div>
+  <div class="bg-element bottom-left"></div>
+  <div class="bg-element bottom-right"></div>
+  
+  <!-- Page title -->
+  <div class="title">
+    <span>Naveen Portfolio</span>
+  </div>
+  
+  <!-- Navigation container -->
+  <div class="container">
+    <!-- Decorative diamonds -->
+    <div class="diamond-decoration diamond-1"></div>
+    <div class="diamond-decoration diamond-2"></div>
+    <div class="diamond-decoration diamond-3"></div>
+    
+    <!-- Navigation items -->
+    <a href="./about.html" class="nav-item about">About</a>
+    <a href="./projects.html" class="nav-item projects">Projects</a>
+    <a href="./home.html" class="nav-item home">Home</a>
+    <a href="./skills.html" class="nav-item skills">Skills</a>
+    <a href="./contact.html" class="nav-item contact">Contact</a>
+  </div>
+  
+  <!-- Footer -->
+  <div class="footer">
+    &copy; 2025 Nelakurthi Naveen | Portfolio
+  </div>
+
+  <script>
+    // Add animation to navigation items on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      const navItems = document.querySelectorAll('.nav-item');
+      const container = document.querySelector('.container');
+      
+      // Initial state
+      container.style.opacity = '0';
+      container.style.transform = 'rotate(45deg) scale(0.5)';
+      
+      // Animate in
+      setTimeout(() => {
+        container.style.transition = 'all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55)';
+        container.style.opacity = '1';
+        container.style.transform = 'rotate(45deg) scale(1)';
+      }, 300);
+      
+      // Add hover effect to all items
+      navItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+          this.style.transform = this.style.transform.replace('scale(1)', 'scale(1.1)');
+        });
+        
+        item.addEventListener('mouseleave', function() {
+          this.style.transform = this.style.transform.replace('scale(1.1)', 'scale(1)');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
