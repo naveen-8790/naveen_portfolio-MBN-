@@ -5,6 +5,7 @@
 This portfolio showcases Nelakurthi Naveen's work as a Computer Science student and developer. It features a unique diamond-based navigation system and showcases projects across web development, AI, and hardware domains.
 
 ![Portfolio Screenshot](https://i.postimg.cc/hjfCRKgX/Screenshot-2025-06-07-101137.png)
+(https://i.postimg.cc/ZKy1yFGW/Screenshot-2025-06-07-101605.png)
 
 ## Features
 - **Diamond Navigation System**: Unique rotating diamond interface for intuitive navigation
